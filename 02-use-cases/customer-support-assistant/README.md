@@ -133,7 +133,13 @@ This is a customer support agent implementation using AWS Bedrock AgentCore fram
 
     ![configure](./images/runtime_configure.png)
 
+    > [!CAUTION]
+    > Please make sure to delete `.agentcore.yaml` before running agentcore launch.
+
     ```bash
+
+    rm .agentcore.yaml
+
     agentcore launch
 
     python test/test_agent.py customersupport<AgentName> -p "Hi"
