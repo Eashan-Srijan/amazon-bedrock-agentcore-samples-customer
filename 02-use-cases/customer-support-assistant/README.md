@@ -121,8 +121,9 @@ This is a customer support agent implementation using AWS Bedrock AgentCore fram
     ```
 
 5. **Setup Agent Runtime**
-    > [!CAUTION]
-    > Please ensure the name of the agent starts with `customersupport`.
+
+> [!CAUTION]
+> Please ensure the name of the agent starts with `customersupport`.
     
     ```bash
     agentcore configure --entrypoint main.py -er arn:aws:iam::<Account-Id>:role/<Role> --name customersupport<AgentName>
