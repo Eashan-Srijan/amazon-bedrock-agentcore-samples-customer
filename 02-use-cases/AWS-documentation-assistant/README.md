@@ -41,8 +41,6 @@ uv run scripts/deploy.py aws_docs_agent
 uv run scripts/deploy.py aws_docs_agent --no-codebuild
 ```
 
-![deploy](./images/deploy.png)
-
 ## Usage
 
 ### Invoke the Agent
