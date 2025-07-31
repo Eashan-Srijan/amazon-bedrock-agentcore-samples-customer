@@ -2,7 +2,7 @@
 
 ## Overview
 
-The SRE Agent is a multi-agent system for Site Reliability Engineers that helps investigate infrastructure issues. Built on the Model Context Protocol (MCP) and powered by Amazon Nova and Anthropic Claude models (Claude can be accessed through Amazon Bedrock or directly through Anthropic), this system uses specialized AI agents that collaborate to investigate issues, analyze logs, monitor performance metrics, and execute operational procedures. The AgentCore Gateway provides access to data sources and systems available as MCP tools.
+The SRE Agent is a multi-agent system for Site Reliability Engineers that helps investigate infrastructure issues. Built on the Model Context Protocol (MCP) and powered by Amazon Nova and Anthropic Claude models (Claude can be accessed through Amazon Bedrock or directly through Anthropic), this system uses specialized AI agents that collaborate to investigate issues, analyze logs, monitor performance metrics, and execute operational procedures. The AgentCore Gateway provides access to data sources and systems available as MCP tools. This example also demonstrates how to deploy the agent using the Amazon Bedrock AgentCore Runtime for production environments.
 
 ### Use case details
 | Information         | Details                                                                                                                             |
@@ -16,72 +16,7 @@ The SRE Agent is a multi-agent system for Site Reliability Engineers that helps 
 
 ### Use case Architecture 
 
-```mermaid
-graph TB
-    subgraph "User Interface"
-        U["🧑‍💻 SRE Engineer"]
-        CLI["Command Line Interface"]
-        U -->|"Natural Language Query"| CLI
-    end
-
-    subgraph "SRE Agent Core"
-        SUP["🧭 Supervisor Agent<br/>Orchestration & Routing"]
-        K8S["☸️ Kubernetes Agent<br/>Infrastructure Operations"]
-        LOG["📊 Logs Agent<br/>Log Analysis & Search"]
-        MET["📈 Metrics Agent<br/>Performance Monitoring"]
-        RUN["📖 Runbooks Agent<br/>Operational Procedures"]
-        
-        CLI -->|"Query"| SUP
-        SUP -->|"Route"| K8S
-        SUP -->|"Route"| LOG
-        SUP -->|"Route"| MET
-        SUP -->|"Route"| RUN
-    end
-
-    subgraph "AgentCore Gateway"
-        GW["🌉 AgentCore Gateway<br/>MCP Protocol Handler"]
-        AUTH["🔐 Authentication<br/>Token Management"]
-        HEALTH["❤️ Health Monitor<br/>Circuit Breaker"]
-        
-        subgraph "Infrastructure APIs"
-            DK8S["Kubernetes API<br/>:8011"]
-            DLOG["Logs API<br/>:8012"]
-            DMET["Metrics API<br/>:8013"]
-            DRUN["Runbooks API<br/>:8014"]
-        end
-        
-        K8S -.->|"MCP"| GW
-        LOG -.->|"MCP"| GW
-        MET -.->|"MCP"| GW
-        RUN -.->|"MCP"| GW
-        
-        GW --> AUTH
-        GW --> HEALTH
-        GW --> DK8S
-        GW --> DLOG
-        GW --> DMET
-        GW --> DRUN
-    end
-
-    subgraph "Amazon Bedrock"
-        CLAUDE["Claude 4 Sonnet<br/>Large Language Model"]
-        SUP -.->|"LLM Calls"| CLAUDE
-        K8S -.->|"LLM Calls"| CLAUDE
-        LOG -.->|"LLM Calls"| CLAUDE
-        MET -.->|"LLM Calls"| CLAUDE
-        RUN -.->|"LLM Calls"| CLAUDE
-    end
-
-    classDef agent fill:#e1f5fe,stroke:#01579b,stroke-width:2px
-    classDef gateway fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
-    classDef api fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
-    classDef bedrock fill:#fff3e0,stroke:#e65100,stroke-width:2px
-    
-    class SUP,K8S,LOG,MET,RUN agent
-    class GW,AUTH,HEALTH gateway
-    class DK8S,DLOG,DMET,DRUN api
-    class CLAUDE bedrock
-```
+![SRE support agent with Amazon Bedrock AgentCore](docs/images/sre-agent-architecture.png)
 
 ### Use case key Features
 
@@ -100,9 +35,10 @@ For comprehensive information about the SRE Agent system, please refer to the fo
 - **[Configuration](docs/configuration.md)** - Complete configuration guides for environment variables, agents, and gateway
 - **[Demo Environment](docs/demo-environment.md)** - Demo scenarios, data customization, and testing setup
 - **[Example Use Cases](docs/example-use-cases.md)** - Detailed walkthroughs and interactive troubleshooting examples
-- **[Deployment and Security](docs/deployment-and-security.md)** - Sample deployment information and security considerations
+- **[Security](docs/security.md)** - Security best practices and considerations for production deployment
 - **[Verification](docs/verification.md)** - Ground truth verification and report validation
 - **[Development](docs/development.md)** - Testing, code quality, and contribution guidelines
+- **[Deployment Guide](docs/deployment-guide.md)** - Complete deployment guide for Amazon Bedrock AgentCore Runtime
 
 ## Prerequisites
 
@@ -120,7 +56,7 @@ For comprehensive information about the SRE Agent system, please refer to the fo
 ```bash
 # Clone the repository
 git clone https://github.com/awslabs/amazon-bedrock-agentcore-samples
-cd amazon-bedrock-agentcore-samples/02-use-cases/04-SRE-agent
+cd amazon-bedrock-agentcore-samples/02-use-cases/SRE-agent
 
 # Create and activate a virtual environment
 uv venv --python 3.12
@@ -195,7 +131,7 @@ sre-agent --interactive
 # /exit     - Exit the interactive session
 ```
 
-### Advanced Options
+#### Advanced Options
 ```bash
 # Use Amazon Bedrock
 sre-agent --provider bedrock --query "Check cluster health"
@@ -206,6 +142,62 @@ sre-agent --output-dir ./investigations --query "Analyze memory usage trends"
 # Use Amazon Bedrock with specific profile
 AWS_PROFILE=production sre-agent --provider bedrock --interactive
 ```
+
+## Development to Production Deployment Flow
+
+The SRE Agent follows a structured deployment process from local development to production on Amazon Bedrock AgentCore Runtime:
+
+```
+STEP 1: LOCAL DEVELOPMENT
+┌─────────────────────────────────────────────────────────────────────┐
+│  Develop Python Package (sre_agent/)                                │
+│  └─> Test locally with CLI: uv run sre-agent --prompt "..."         │
+│      └─> Agent connects to AgentCore Gateway via MCP protocol       │
+└─────────────────────────────────────────────────────────────────────┘
+                                    ↓
+STEP 2: CONTAINERIZATION  
+┌─────────────────────────────────────────────────────────────────────┐
+│  Add agent_runtime.py (FastAPI server wrapper)                      │
+│  └─> Create Dockerfile (ARM64 for AgentCore)                        │
+│      └─> Uses deployment/build_and_deploy.sh script                 │
+└─────────────────────────────────────────────────────────────────────┘
+                                    ↓
+STEP 3: LOCAL CONTAINER TESTING
+┌─────────────────────────────────────────────────────────────────────┐
+│  Build: LOCAL_BUILD=true ./deployment/build_and_deploy.sh           │
+│  └─> Run: docker run -p 8080:8080 sre_agent:latest                  │
+│      └─> Test: curl -X POST http://localhost:8080/invocations       │
+│          └─> Container connects to same AgentCore Gateway           │
+└─────────────────────────────────────────────────────────────────────┘
+                                    ↓
+STEP 4: PRODUCTION DEPLOYMENT
+┌─────────────────────────────────────────────────────────────────────┐
+│  Build & Push: ./deployment/build_and_deploy.sh                     │
+│  └─> Pushes container to Amazon ECR                                 │
+│      └─> deployment/deploy_agent_runtime.py deploys to AgentCore    │
+│          └─> Test: uv run python deployment/invoke_agent_runtime.py │
+│              └─> Production agent uses production Gateway           │
+└─────────────────────────────────────────────────────────────────────┘
+
+Key Points:
+• Core agent code (sre_agent/) remains unchanged
+• Deployment/ folder contains all deployment-specific utilities
+• Same agent works locally and in production via environment config
+• AgentCore Gateway provides MCP tools access at all stages
+```
+
+## Deploying Your Agent on Amazon Bedrock AgentCore Runtime
+
+For production deployments, you can deploy the SRE Agent directly to Amazon Bedrock AgentCore Runtime. This provides a scalable, managed environment for running your agent with enterprise-grade security and monitoring.
+
+The AgentCore Runtime deployment supports:
+- **Container-based deployment** with automatic scaling
+- **Multiple LLM providers** (Amazon Bedrock or Anthropic Claude)
+- **Debug mode** for troubleshooting and development
+- **Environment-based configuration** for different deployment stages
+- **Secure credential management** through AWS IAM and environment variables
+
+For complete step-by-step instructions including local testing, container building, and production deployment, see the **[Deployment Guide](docs/deployment-guide.md)**.
 
 ## Managing OpenAPI Specifications
 
