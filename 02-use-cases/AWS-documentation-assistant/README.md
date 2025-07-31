@@ -7,7 +7,7 @@ An intelligent AWS documentation assistant powered by Amazon Bedrock AgentCore. 
 
 ## Introduction
 
-The AWS Documentation Agent leverages the AWS Documentation MCP (Model Context Protocol) server to provide intelligent responses about AWS services, features, and best practices. It can search through AWS documentation, answer questions about AWS concepts, and guide users to relevant documentation sections.
+The AWS Documentation Agent leverages the [AWS Documentation MCP (Model Context Protocol) server](https://github.com/awslabs/mcp/tree/main/src/aws-documentation-mcp-server) to provide intelligent responses about AWS services, features, and best practices. It can search through AWS documentation, answer questions about AWS concepts, and guide users to relevant documentation sections.
 
 ## Prerequisites
 
