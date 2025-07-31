@@ -90,3 +90,12 @@ config.yaml
 # Temporary files
 *.tmp
 *.temp
+
+# Scratchpad and notes
+.scratchpad.md
+docs/agentic-ai-architecture-assessment.md
+
+# Deployment artifacts
+deployment/.sre_agent_uri
+deployment/.env
+deployment/.agent_arn
