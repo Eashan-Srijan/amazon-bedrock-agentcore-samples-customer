@@ -2,7 +2,7 @@
 
 Welcome to the Amazon Bedrock AgentCore Samples repository! 
 
-> [!DISCLAIMER]
+> [!IMPORTANT]
 > The examples provided in this repository are for experimental and educational purposes only. They demonstrate concepts and techniques but are not intended for direct use in production environments.
 
 **Amazon Bedrock AgentCore** is a complete set of capabilities to deploy and operate agents securely, at scale using any agentic framework and any LLM model. 
