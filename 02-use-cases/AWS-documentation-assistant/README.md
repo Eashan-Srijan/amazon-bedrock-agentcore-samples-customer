@@ -23,8 +23,10 @@ Before deploying the agent, ensure you have:
 
 1. Clone or download this repository
 2. Install dependencies:
+
    ```bash
    uv sync
+   source .venv/bin/activate
    ```
 
 ## Deployment
@@ -35,10 +37,8 @@ Deploy the agent using the deploy script:
 
 ```bash
 # Deploy with CodeBuild (recommended)
-uv run scripts/deploy.py aws_docs_agent
-
-# Deploy without CodeBuild
-uv run scripts/deploy.py aws_docs_agent --no-codebuild
+agentcore configure --entrypoint main.py --name aws_docs_agent
+agentcore launch
 ```
 
 ## Usage
@@ -49,13 +49,14 @@ Once deployed, you can invoke the agent with questions:
 
 ```bash
 # Ask about AWS services
-uv run scripts/invoke.py aws_docs_agent "What is Amazon S3?"
+
+agentcore invoke '{"prompt": "What is Amazon S3?"}' -s 0bcc5e66-0bff-4c2b-a7b1-86446c43597a
 
 # Get specific configuration help
-uv run scripts/invoke.py aws_docs_agent "How do I configure VPC endpoints for S3?"
+agentcore invoke '{"prompt": "How do I configure VPC endpoints for S3?"}' -s 0bcc5e66-0bff-4c2b-a7b1-86446c43597a
 
 # Ask about best practices
-uv run scripts/invoke.py aws_docs_agent "What are the security best practices for AWS Lambda?"
+agentcore invoke '{"prompt": "What are the security best practices for AWS Lambda?"}' -s 0bcc5e66-0bff-4c2b-a7b1-86446c43597a
 ```
 
 ### Example Queries
@@ -80,7 +81,7 @@ uv run scripts/clean.py aws_docs_agent
 uv run scripts/clean.py aws_docs_agent --dry-run
 ```
 
-**Note**: The cleanup script removes the agent runtime but may not delete all associated AWS resources (like IAM roles or ECR repositories) that were auto-created during deployment. You may need to clean these up manually if desired.
+**Note**: The cleanup script removes the agent runtime but may not delete all associated AWS resources (like IAM roles or AWS Codebuild projects) that were auto-created during deployment. You may need to clean these up manually if desired.
 
 ## Project Structure
 
