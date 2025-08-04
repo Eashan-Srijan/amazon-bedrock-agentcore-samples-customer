@@ -1,6 +1,6 @@
-# Cloud Strands Insurance Agent with AWS Bedrock AgentCore
+# Cloud Strands Insurance Agent with Amazon Bedrock AgentCore
 
-This guide shows how to deploy and run a Strands-based Insurance Agent that connects to AWS AgentCore Gateway MCP services for handling auto insurance quotes and vehicle information queries.
+This guide shows how to deploy and run a Strands-based Insurance Agent that connects to Amazon Bedrock AgentCore Gateway MCP services for handling auto insurance quotes and vehicle information queries.
 
 ![Bedrock AgentCore Insurance App Conversation](agentcore_strands_conversation.gif)
 
@@ -151,7 +151,7 @@ Deploy your agent to AWS:
 # Load environment variables from .env file
 source .env
 
-# Deploy to AWS Bedrock AgentCore
+# Deploy to Amazon Bedrock AgentCore
 agentcore launch \
   -env MCP_SERVER_URL=$MCP_SERVER_URL \
   -env MCP_ACCESS_TOKEN=$MCP_ACCESS_TOKEN

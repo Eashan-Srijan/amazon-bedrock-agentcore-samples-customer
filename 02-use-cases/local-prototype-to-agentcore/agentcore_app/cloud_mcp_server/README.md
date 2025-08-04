@@ -1,17 +1,17 @@
 # Cloud MCP Server
 
-This component sets up an AWS Bedrock AgentCore Gateway that exposes insurance API operations as MCP tools using an OpenAPI specification.
+This component sets up an Amazon Bedrock AgentCore Gateway that exposes insurance API operations as MCP tools using an OpenAPI specification.
 
 ## Overview
 
-The Cloud MCP Server acts as a bridge between your LLM-powered agents and your insurance API. It leverages AWS Bedrock AgentCore Gateway to create a secure, managed MCP (Model Control Protocol) endpoint that agents can use to access insurance operations.
+The Cloud MCP Server acts as a bridge between your LLM-powered agents and your insurance API. It leverages Amazon Bedrock AgentCore Gateway to create a secure, managed MCP (Model Control Protocol) endpoint that agents can use to access insurance operations.
 
 ## Features
 
 - **OpenAPI Integration**: Automatically converts your API's OpenAPI specification into MCP tools
 - **OAuth Authentication**: Configures secure access with Amazon Cognito
 - **Environment-Based Configuration**: Uses environment variables for flexible deployment
-- **Gateway Management**: Creates and configures the AWS Bedrock AgentCore Gateway
+- **Gateway Management**: Creates and configures the Amazon Bedrock AgentCore Gateway
 
 ## Prerequisites
 
@@ -67,7 +67,7 @@ python agentcore_gateway_setup_openapi.py
 
 This will:
 
-1. Create a new AWS Bedrock AgentCore Gateway
+1. Create a new Amazon Bedrock AgentCore Gateway
 2. Configure OAuth authentication with Amazon Cognito
 3. Register your OpenAPI specification as MCP tools
 4. Save the gateway information for future use

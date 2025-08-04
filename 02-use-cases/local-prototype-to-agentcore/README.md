@@ -1,4 +1,4 @@
-# From Prototype to Production: Agentic Applications with AWS Bedrock AgentCore
+# From Prototype to Production: Agentic Applications with Amazon Bedrock AgentCore
 > [!CAUTION]
 > This sample is for experimental and educational purposes only. They demonstrate concepts and techniques but are not intended for direct use in production environments. Make sure to have Amazon Bedrock Guardrails in place to protect against [prompt injection](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-injection.html). 
 
@@ -14,7 +14,7 @@
 
 <div align="center">
   <img src="https://img.shields.io/badge/Python-3.10+-blue.svg" alt="Python 3.10+"/>
-  <img src="https://img.shields.io/badge/AWS-Bedrock_AgentCore-orange.svg" alt="AWS Bedrock AgentCore"/>
+  <img src="https://img.shields.io/badge/AWS-Bedrock_AgentCore-orange.svg" alt="Amazon Bedrock AgentCore"/>
   <img src="https://img.shields.io/badge/Strands-Agents-green.svg" alt="Strands Agents"/>
   <img src="https://img.shields.io/badge/FastAPI-0.100.0+-purple.svg" alt="FastAPI"/>
 </div>
@@ -23,12 +23,12 @@
 
 ## 🚀 Overview
 
-This repository demonstrates how to transform a local prototype of an agentic application into a production-ready system using AWS Bedrock AgentCore. It provides a complete implementation of an auto insurance agent that helps customers get quotes, retrieve vehicle information, and manage policies.
+This repository demonstrates how to transform a local prototype of an agentic application into a production-ready system using Amazon Bedrock AgentCore. It provides a complete implementation of an auto insurance agent that helps customers get quotes, retrieve vehicle information, and manage policies.
 
 The repository contains two parallel implementations:
 
 - **`local_prototype/`** - A development-focused implementation using local servers and direct connections
-- **`agentcore_app/`** - A production-ready implementation leveraging AWS Bedrock AgentCore services
+- **`agentcore_app/`** - A production-ready implementation leveraging Amazon Bedrock AgentCore services
 
 ## ✨ Key Benefits of Cloud Migration
 
@@ -59,7 +59,7 @@ The production architecture consists of three main components:
 
 ## 🛠️ Technologies Used
 
-- **AWS Bedrock AgentCore**: Managed agent runtime environment
+- **Amazon Bedrock AgentCore**: Managed agent runtime environment
 - **AWS Lambda & API Gateway**: Serverless API hosting
 - **Amazon Cognito**: Authentication and authorization
 - **Strands Agents**: Agent framework with MCP integration
@@ -205,7 +205,7 @@ handler = Mangum(app)
 
 ### 2. MCP Server to AgentCore Gateway
 
-The local MCP server is replaced by AWS Bedrock AgentCore Gateway:
+The local MCP server is replaced by Amazon Bedrock AgentCore Gateway:
 
 - **OpenAPI Integration**: The Gateway imports API operations from OpenAPI specification
 - **Tool Schema Definition**: API endpoints are converted to MCP tool schemas
@@ -231,7 +231,7 @@ client.create_mcp_gateway_target(
 
 ### 3. Strands Agent to AgentCore Runtime
 
-The local Strands agent is deployed to AWS Bedrock AgentCore Runtime:
+The local Strands agent is deployed to Amazon Bedrock AgentCore Runtime:
 
 - **BedrockAgentCoreApp**: Wrapper for deploying Strands agents to AWS
 - **Entrypoint Decoration**: Standardized interface for cloud execution
@@ -327,7 +327,7 @@ The Insurance API is built with FastAPI and deployed as a serverless application
 
 ### Cloud MCP Server
 
-The MCP Server component configures AWS Bedrock AgentCore Gateway to expose insurance API operations as MCP tools that can be used by LLM-powered agents.
+The MCP Server component configures Amazon Bedrock AgentCore Gateway to expose insurance API operations as MCP tools that can be used by LLM-powered agents.
 
 [Learn more about the Cloud MCP Server](agentcore_app/cloud_mcp_server/README.md)
 
@@ -408,5 +408,5 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](../../
 ---
 
 <p align="center">
-  Built with ❤️ using AWS Bedrock AgentCore and Strands Agents
+  Built with ❤️ using Amazon Bedrock AgentCore and Strands Agents
 </p>

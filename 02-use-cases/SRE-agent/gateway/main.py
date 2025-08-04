@@ -2,7 +2,7 @@
 """
 AgentCore Gateway Management Tool
 
-This tool provides functionality to create and manage AWS AgentCore Gateways
+This tool provides functionality to create and manage Amazon Bedrock AgentCore Gateways
 with MCP protocol support and JWT authorization. It supports creating
 gateways and adding OpenAPI targets from S3 or inline schemas.
 """
@@ -482,7 +482,7 @@ def list_gateway_targets(client: Any, gateway_id: str) -> Dict[str, Any]:
 def main():
     """Main function to orchestrate gateway creation and management."""
     parser = argparse.ArgumentParser(
-        description="Create and manage AWS AgentCore Gateways with MCP protocol support"
+        description="Create and manage Amazon Bedrock AgentCore Gateways with MCP protocol support"
     )
 
     # Required arguments
@@ -667,14 +667,14 @@ def main():
                 s3_uri.split("/")[-1].replace(".yaml", "").replace(".json", "")
             )
             if not target_name or target_name == s3_uri:
-                target_name = f"target-{i+1}"
+                target_name = f"target-{i + 1}"
 
             # Replace underscores with hyphens to meet AWS naming requirements
             # AWS requires: ([0-9a-zA-Z][-]?){1,100}
             target_name = target_name.replace("_", "-")
 
             logging.info(
-                f"Creating S3 OpenAPI target {i+1}/{len(s3_uris)}: {target_name}"
+                f"Creating S3 OpenAPI target {i + 1}/{len(s3_uris)}: {target_name}"
             )
             s3_response = create_s3_target(
                 client=client,
@@ -687,7 +687,7 @@ def main():
             s3_responses.append(s3_response)
 
             if args.output_json:
-                print(f"\nS3 Target {i+1} Creation:")
+                print(f"\nS3 Target {i + 1} Creation:")
                 print(json.dumps(s3_response, indent=2, default=str))
 
         if not args.output_json:

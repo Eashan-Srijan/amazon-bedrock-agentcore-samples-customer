@@ -9,8 +9,7 @@ import threading
 # If you only want debug logging for strands
 logging.getLogger("strands.multiagent").setLevel(logging.DEBUG)
 logging.basicConfig(
-    format="%(levelname)s | %(name)s | %(message)s",
-    handlers=[logging.StreamHandler()]
+    format="%(levelname)s | %(name)s | %(message)s", handlers=[logging.StreamHandler()]
 )
 
 # If you want debug logging everywhere
@@ -22,13 +21,9 @@ from strands.multiagent import GraphBuilder
 from strands_tools import file_write, file_read, shell, use_aws
 from strands.models import BedrockModel
 
-sonnet = BedrockModel(
-    model_id="us.anthropic.claude-3-5-sonnet-20240620-v1:0"
-)
+sonnet = BedrockModel(model_id="us.anthropic.claude-3-5-sonnet-20240620-v1:0")
 
-haiku = BedrockModel(
-    model_id="us.anthropic.claude-3-5-haiku-20241022-v1:0"
-)
+haiku = BedrockModel(model_id="us.anthropic.claude-3-5-haiku-20241022-v1:0")
 
 import os
 import glob
@@ -45,7 +40,11 @@ from bedrock_agentcore.runtime import BedrockAgentCoreApp
 
 app = BedrockAgentCoreApp()
 
-@tool(name="background_shopping", description="Based on the incoming shpping request, this agent-as-a-tool starts a background shopping task and writes a result file when done. The live shopping session can be seen on the Bedrock Agentcore console")
+
+@tool(
+    name="background_shopping",
+    description="Based on the incoming shpping request, this agent-as-a-tool starts a background shopping task and writes a result file when done. The live shopping session can be seen on the Amazon Bedrock Agentcore console",
+)
 def call_browser_tool(request: str):
     """Call the browser tool with a web task to perform. You can provide a simple high level task, which is
     completed asynchronously by a sub agent. Prompt the browser agent via the task description that the response
@@ -63,7 +62,10 @@ def call_browser_tool(request: str):
         print("Starting background thread ...")
         thread = threading.Thread(
             target=_run_browser_task,
-            args=(request + " (do a very quick and brief search, the faster you return search results the better. For example, no need to click into the product description if you see the price on the main search results)",),
+            args=(
+                request
+                + " (do a very quick and brief search, the faster you return search results the better. For example, no need to click into the product description if you see the price on the main search results)",
+            ),
             daemon=True,
         )
         thread.start()
@@ -71,7 +73,6 @@ def call_browser_tool(request: str):
 
     except Exception as e:
         print(f"NovaAct error: {e}")
-    
 
     return {"messages": [{"role": "tool", "content": "running browser search"}]}
 
@@ -123,28 +124,28 @@ def _run_browser_task(request: str):
                 print(
                     f"[Processor {task_id}] Task completion: {'SUCCESS' if success else 'FAILED'}"
                 )
-                return {'status':success, 'location': filename}
+                return {"status": success, "location": filename}
         except Exception as e:
             success = app.complete_async_task(task_id)
-            return {'status': str(e), 'location': 'please check nova act logs'}
+            return {"status": str(e), "location": "please check nova act logs"}
 
 
 @tool
 def get_tasks_info():
     """Get status of running web search tasks and list any result files and Nova Act log files"""
     import os
-    
+
     # Get task info
     task_info = app.get_async_task_info()
     logging.debug(task_info)
-    
+
     # Get result files from /tmp
     result_files = glob.glob("/tmp/result_*.txt")
     logging.debug(result_files)
-    
+
     # Get Nova Act log files from /tmp
     nova_act_logs = []
-    
+
     # Look for Nova Act log directories in /tmp
     tmp_dirs = glob.glob("/tmp/tmp*_nova_act_logs")
     for tmp_dir in tmp_dirs:
@@ -156,19 +157,21 @@ def get_tasks_info():
                     # Find HTML log files
                     log_files = glob.glob(f"{session_dir}/act_*.html")
                     nova_act_logs.extend(log_files)
-    
+
     tasks_result = {
-        "message": "Current task information", 
+        "message": "Current task information",
         "task_info": task_info,
         "result_files": result_files,
-        "nova_act_logs": nova_act_logs
+        "nova_act_logs": nova_act_logs,
     }
 
     logging.debug(f"Nova Act logs found: {nova_act_logs}")
     return tasks_result
 
-reporting_agent = Agent(name="reporting_assistant", 
-                        system_prompt="""You are a report generation agent. Once the shopping session is completed, you can read
+
+reporting_agent = Agent(
+    name="reporting_assistant",
+    system_prompt="""You are a report generation agent. Once the shopping session is completed, you can read
                          one or more results_<sessionid>.txt files and respond to the user with the content you see.
                          
                          If no result files are available but Nova Act log files are found, you can read those HTML log files
@@ -176,22 +179,26 @@ reporting_agent = Agent(name="reporting_assistant",
                          are typically located at paths like /tmp/tmp*_nova_act_logs/*/act_*.html and contain detailed
                          information about the browser session. These log files are very large, so do not try to read the 
                          entire file, all at once.""",
-                        tools=[file_read, get_tasks_info, shell, file_write],
-                        model = haiku)
+    tools=[file_read, get_tasks_info, shell, file_write],
+    model=haiku,
+)
 
-fronting_agent = Agent(name="fronting_assistant", 
-                    system_prompt="""You are a shopping assistant for amazon.com. You receive a request from the user, and answer immediately
+fronting_agent = Agent(
+    name="fronting_assistant",
+    system_prompt="""You are a shopping assistant for amazon.com. You receive a request from the user, and answer immediately
                      if it is a generic question, or route to a background shopping agent. If you decide to go on with background 
                      shopping you must return `shop_background.start` in your text response. You may also read any reports or results
                      generated by other agents; this will be in the format `/tmp/result_<session_id>`. 
                      You also have a tool to check the status of running tasks. 
                      
                      DO NOT use the reporting agent tool right after creating a browser session. Ask the user to wait for results. """,
-                    tools = [get_tasks_info, file_read],
-                    model = sonnet)
+    tools=[get_tasks_info, file_read],
+    model=sonnet,
+)
 
-shopping_agent = Agent(name="shopping_assistant", 
-                    system_prompt="""You are a background shopping assistant. You receive a request from the user, and
+shopping_agent = Agent(
+    name="shopping_assistant",
+    system_prompt="""You are a background shopping assistant. You receive a request from the user, and
                      asynchronously search amazon.com and report back to the customer. Once you start a shopping session, 
                      recognize that this will take a long time to complete. After starting one or more sessions in parallel,
                      return immediately to the user with an appropriate message. 
@@ -207,10 +214,9 @@ shopping_agent = Agent(name="shopping_assistant",
                      NOTE 4: DO NOT ask follow up questions, start analyzing the task immediately using the web search tool.
                     
                     Lastly, if the user asks for the status of the search or for a report, use the appropriate tools to assist.""",
-                    tools = [call_browser_tool],
-                    model = sonnet)
-
-
+    tools=[call_browser_tool],
+    model=sonnet,
+)
 
 
 def only_if_shopping_needed(state):
@@ -220,16 +226,16 @@ def only_if_shopping_needed(state):
     # Eg. state:
 
     # GraphState(
-    # task='please search for price of echo pop on amazon.com?', 
-    # status=<Status.EXECUTING: 'executing'>, 
+    # task='please search for price of echo pop on amazon.com?',
+    # status=<Status.EXECUTING: 'executing'>,
     # completed_nodes=
     #   {
-    #   GraphNode(node_id='start', 
-    #   executor=<strands.agent.agent.Agent object at 0xffff828fbfd0>, dependencies=set(), 
-    #   execution_status=<Status.COMPLETED: 'completed'>, 
-    #   result=NodeResult(result=AgentResult(stop_reason='end_turn', 
+    #   GraphNode(node_id='start',
+    #   executor=<strands.agent.agent.Agent object at 0xffff828fbfd0>, dependencies=set(),
+    #   execution_status=<Status.COMPLETED: 'completed'>,
+    #   result=NodeResult(result=AgentResult(stop_reason='end_turn',
     #   message={
-    #       'role': 'assistant', 
+    #       'role': 'assistant',
     #       'content': [{'text': "Certainly! I'd be happy to help you search for the price of the Echo Pop on Amazon.com. To do this, I'll need to use our background shopping agent to perform the search. Let me initiate that process for you.\n\nshop_background.start\n\nI've started a background shopping task to search for the Echo Pop on Amazon.com. This process will take a little time to complete as it needs to access the website and gather the information. \n\nWhile we wait for the results, is there anything specific you'd like to know about the Echo Pop besides its price? For example, are you interested in its features, color options, or customer reviews?"}]}
     logging.debug("---------------------------------------------------------")
     logging.debug(f"task: {state.task}")
@@ -253,10 +259,13 @@ def only_if_shopping_needed(state):
 def only_if_background_task_is_done(state):
     tasks = get_tasks_info()
     # Return True if there are no active tasks AND either result files or Nova Act logs are available
-    if tasks['task_info']['active_count'] == 0 and (tasks['result_files'] != [] or tasks['nova_act_logs'] != []):
+    if tasks["task_info"]["active_count"] == 0 and (
+        tasks["result_files"] != [] or tasks["nova_act_logs"] != []
+    ):
         return True
     else:
         return False
+
 
 builder = GraphBuilder()
 
@@ -270,6 +279,7 @@ builder.set_entry_point("start")
 
 graph = builder.build()
 
+
 @app.entrypoint
 def handler(payload, context):
     if "test" in payload:
@@ -279,9 +289,9 @@ def handler(payload, context):
     elif "prompt" in payload:
         result = graph(payload.get("prompt"))
         # print(result) # GraphResults object
-        return {"result": result.results['start'].result.message}
+        return {"result": result.results["start"].result.message}
     else:
         return {"result": "You must provide a `prompt` or `test` key to proceed. ✋"}
 
-app.run()
 
+app.run()

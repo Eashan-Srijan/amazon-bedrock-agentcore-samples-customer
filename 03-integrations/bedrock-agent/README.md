@@ -1,4 +1,4 @@
-# Amazon Bedrock Agent Integration with Bedrock AgentCore Gateway
+# Amazon Bedrock Agent Integration with Amazon Bedrock AgentCore Gateway
 
 ## Overview
 
@@ -50,7 +50,7 @@ User Query → Bedrock Agent → Bridge Lambda → AgentCore Gateway → Backend
 #### Authentication with Amazon Cognito
 
 **Why Cognito is Required:**
-Bedrock AgentCore Gateway requires secure authentication to protect your backend APIs. Amazon Cognito provides:
+Amazon Bedrock AgentCore Gateway requires secure authentication to protect your backend APIs. Amazon Cognito provides:
 
 - **OAuth2 Client Credentials Flow**: Secure machine-to-machine authentication
 - **JWT Token Management**: Automatic token generation and validation
@@ -110,7 +110,7 @@ cd 06-BedrockAgent-Integration
 python -m venv .venv
 .venv/bin/activate
 
-# Install packages required for Bedrock AgentCore Gateway
+# Install packages required for Amazon Bedrock AgentCore Gateway
 pip install -r requirements.txt
 
 # Install remaining packages
@@ -138,7 +138,7 @@ Execute the notebook cells in order:
 2. **Step 3**: Create DynamoDB tables for orders and inventory
 3. **Step 4**: Setup Cognito authentication
 4. **Step 5**: Deploy the target Lambda function
-5. **Step 6-7**: Create and configure the Bedrock AgentCore Gateway
+5. **Step 6-7**: Create and configure the Amazon Bedrock AgentCore Gateway
 6. **Step 8**: Test the gateway integration
 7. **Step 9-12**: Create and configure the Bedrock Agent
 8. **Step 13**: End-to-end testing

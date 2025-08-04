@@ -26,7 +26,7 @@ The AgentCore Code Interpreter follows a modern three-tier architecture:
              │                                        │
 ┌────────────┴────────────────────────────────────────┴───────────┐
 │                      SERVICE LAYER                             │
-│                     AWS Bedrock Services                       │
+│                     Amazon Bedrock Services                       │
 │  ┌─────────────────┐                    ┌─────────────────┐     │
 │  │ Claude Sonnet3.7│                    │   AgentCore     │     │
 │  │ (Inference      │                    │ CodeInterpreter │     │
@@ -64,8 +64,8 @@ The AgentCore Code Interpreter follows a modern three-tier architecture:
   - Session persistence
   - Error handling and logging
 
-### Service Layer (AWS Bedrock)
-- **Technology**: AWS Bedrock + AgentCore
+### Service Layer (Amazon Bedrock)
+- **Technology**: Amazon Bedrock AgentCore
 - **Purpose**: AI model inference and code execution
 - **Components**:
   - **Claude Sonnet 3.7**: Primary AI model (inference profile)
@@ -126,7 +126,7 @@ Results → Frontend → Formatted Display
 | **Backend** | FastAPI | High-performance API framework |
 | | Strands-Agents | AI agent orchestration |
 | | Python 3.8+ | Runtime environment |
-| **AI Services** | AWS Bedrock | AI model hosting |
+| **AI Services** | Amazon Bedrock | AI model hosting |
 | | Claude Sonnet 3.7 | Primary language model |
 | | Nova Premier | Fallback language model |
 | **Execution** | AgentCore | Sandboxed code execution |

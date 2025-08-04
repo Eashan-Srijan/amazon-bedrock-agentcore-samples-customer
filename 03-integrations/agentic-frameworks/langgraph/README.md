@@ -1,4 +1,4 @@
-# LangGraph Agent with Bedrock AgentCore Integration
+# LangGraph Agent with Amazon Bedrock AgentCore Integration
 
 | Information         | Details                                                                      |
 |---------------------|------------------------------------------------------------------------------|
@@ -9,7 +9,7 @@
 | Example complexity  | Easy                                                                 |
 | SDK used            | Amazon BedrockAgentCore Python SDK                                           |
 
-This example demonstrates how to integrate a LangGraph agent with AWS Bedrock AgentCore, enabling you to deploy a web search-capable agent as a managed service.
+This example demonstrates how to integrate a LangGraph agent with Amazon Amazon Bedrock AgentCore, enabling you to deploy a web search-capable agent as a managed service.
 
 ## Prerequisites
 
@@ -38,7 +38,7 @@ uv pip install -r requirements.txt
 
 ### 3. Understanding the Agent Code
 
-The `langgraph_agent_web_search.py` file contains a LangGraph agent with web search capabilities, integrated with Bedrock AgentCore:
+The `langgraph_agent_web_search.py` file contains a LangGraph agent with web search capabilities, integrated with Amazon Bedrock AgentCore:
 
 ```python
 from typing import Annotated
@@ -78,7 +78,7 @@ graph_builder.add_edge("tools", "chatbot")
 graph_builder.add_edge(START, "chatbot")
 graph = graph_builder.compile()
 
-# Integrate with Bedrock AgentCore
+# Integrate with Amazon Bedrock AgentCore
 from bedrock_agentcore.runtime import BedrockAgentCoreApp
 app = BedrockAgentCoreApp()
 
@@ -91,7 +91,7 @@ def agent_invocation(payload, context):
 app.run()
 ```
 
-### 4. Configure and Launch with Bedrock AgentCore Toolkit
+### 4. Configure and Launch with Amazon Bedrock AgentCore Toolkit
 
 ```bash
 # Configure your agent for deployment
@@ -137,10 +137,10 @@ This agent uses LangGraph to create a directed graph for agent reasoning:
 4. The tools node executes the search and returns results
 5. Results are sent back to the chatbot for final response generation
 
-The Bedrock AgentCore framework handles deployment, scaling, and management of the agent in AWS.
+The Amazon Bedrock AgentCore framework handles deployment, scaling, and management of the agent in AWS.
 
 ## Additional Resources
 
 - [LangGraph Documentation](https://github.com/langchain-ai/langgraph)
 - [LangChain Documentation](https://python.langchain.com/docs/get_started/introduction)
-- [Bedrock AgentCore Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-core.html)
+- [Amazon Bedrock AgentCore Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-core.html)

@@ -1,6 +1,6 @@
 # Front-End Implementation - Integrating AgentCore with a Ready-to-Use Data Analyst Assistant Application
 
-A powerful React-based web application that integrates with **[AWS Bedrock AgentCore](https://aws.amazon.com/bedrock/agentcore/)** to provide an intelligent data analysis interface for video game sales data.
+A powerful React-based web application that integrates with **[Amazon Bedrock AgentCore](https://aws.amazon.com/bedrock/agentcore/)** to provide an intelligent data analysis interface for video game sales data.
 
 ## Overview
 

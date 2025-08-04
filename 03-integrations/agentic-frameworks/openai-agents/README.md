@@ -1,4 +1,4 @@
-# OpenAI Agents with Bedrock AgentCore Integration
+# OpenAI Agents with Amazon Bedrock AgentCore Integration
 
 | Information         | Details                                                                      |
 |---------------------|------------------------------------------------------------------------------|
@@ -9,7 +9,7 @@
 | Example complexity  | Medium                                                                       |
 | SDK used            | Amazon BedrockAgentCore Python SDK, OpenAI Agents SDK                   |
 
-This example demonstrates how to integrate OpenAI Agents with AWS Bedrock AgentCore, showcasing agent handoffs for specialized tasks.
+This example demonstrates how to integrate OpenAI Agents with Amazon Amazon Bedrock AgentCore, showcasing agent handoffs for specialized tasks.
 
 ## Prerequisites
 
@@ -68,7 +68,7 @@ async def main(query=None):
     result = await Runner.run(agent, query)
     return result
 
-# Integration with Bedrock AgentCore
+# Integration with Amazon Bedrock AgentCore
 from bedrock_agentcore.runtime import BedrockAgentCoreApp
 app = BedrockAgentCoreApp()
 
@@ -135,7 +135,7 @@ This pattern allows for:
 - Clear separation of concerns between agents
 - More accurate and relevant responses for domain-specific queries
 
-## Configure and Launch with Bedrock AgentCore
+## Configure and Launch with Amazon Bedrock AgentCore
 
 ```bash
 # Configure your agent for deployment
@@ -160,4 +160,4 @@ The system will:
 ## Additional Resources
 
 - [OpenAI Agents Documentation](https://platform.openai.com/docs/assistants/overview)
-- [Bedrock AgentCore Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-core.html)
+- [Amazon Bedrock AgentCore Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-core.html)

@@ -1,4 +1,4 @@
-# AutoGen Agent with Bedrock AgentCore Integration
+# AutoGen Agent with Amazon Bedrock AgentCore Integration
 
 | Information         | Details                                                                      |
 |---------------------|------------------------------------------------------------------------------|
@@ -9,7 +9,7 @@
 | Example complexity  | Easy                                                                 |
 | SDK used            | Amazon BedrockAgentCore Python SDK                                           |
 
-This example demonstrates how to integrate an AutoGen agent with AWS Bedrock AgentCore, enabling you to deploy a conversational agent with tool-using capabilities as a managed service.
+This example demonstrates how to integrate an AutoGen agent with Amazon Bedrock AgentCore, enabling you to deploy a conversational agent with tool-using capabilities as a managed service.
 
 ## Prerequisites
 
@@ -39,7 +39,7 @@ uv pip install -r requirements.txt
 
 ### 3. Understanding the Agent Code
 
-The `autogen_agent_hello_world.py` file contains an AutoGen agent with a weather tool capability, integrated with Bedrock AgentCore:
+The `autogen_agent_hello_world.py` file contains an AutoGen agent with a weather tool capability, integrated with Amazon Bedrock AgentCore:
 
 ```python
 from autogen_agentchat.agents import AssistantAgent
@@ -75,7 +75,7 @@ agent = AssistantAgent(
     model_client_stream=True,  # Enable streaming tokens
 )
 
-# Integrate with Bedrock AgentCore
+# Integrate with Amazon Bedrock AgentCore
 from bedrock_agentcore.runtime import BedrockAgentCoreApp
 app = BedrockAgentCoreApp()
 
@@ -98,7 +98,7 @@ async def main(payload):
 app.run()
 ```
 
-### 4. Configure and Launch with Bedrock AgentCore Toolkit
+### 4. Configure and Launch with Amazon Bedrock AgentCore Toolkit
 
 ```bash
 # Configure your agent for deployment
@@ -135,7 +135,7 @@ This agent uses AutoGen's agent framework to create an assistant that can:
 3. Execute tools and incorporate their results into responses
 4. Stream responses in real-time
 
-The agent is wrapped with the Bedrock AgentCore framework, which handles:
+The agent is wrapped with the Amazon Bedrock AgentCore framework, which handles:
 - Deployment to AWS
 - Scaling and management
 - Request/response handling
@@ -144,5 +144,5 @@ The agent is wrapped with the Bedrock AgentCore framework, which handles:
 ## Additional Resources
 
 - [AutoGen Documentation](https://microsoft.github.io/autogen/)
-- [Bedrock AgentCore Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-core.html)
+- [Amazon Bedrock AgentCore Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-core.html)
 - [OpenAI API Documentation](https://platform.openai.com/docs/api-reference)

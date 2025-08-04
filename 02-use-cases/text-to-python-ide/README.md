@@ -1,6 +1,6 @@
 # Text to Python IDE
 
-A powerful AI-powered code generation and execution platform that combines **Strands-Agents** framework with **AWS Bedrock AgentCore** for intelligent Python code development.
+A powerful AI-powered code generation and execution platform that combines **Strands-Agents** framework with **Amazon Bedrock AgentCore** for intelligent Python code development.
 
 ## 🎯 Overview
 
@@ -15,7 +15,7 @@ Text to Python IDE is a full-stack application that enables users to:
 ### Key Features
 
 - 🤖 **AI-Powered Code Generation** using Claude Sonnet 3.7 and Nova Premier
-- ⚡ **Real-time Code Execution** via AWS Bedrock AgentCore
+- ⚡ **Real-time Code Execution** via Amazon Bedrock AgentCore
 - 📊 **CSV File Upload & Integration** for data analysis workflows
 - ⏱️ **Execution Timer** with visual feedback for long-running operations
 - 🔄 **Intelligent Model Fallback** for maximum reliability
@@ -45,7 +45,7 @@ Text to Python IDE is a full-stack application that enables users to:
 - **Session Management**: RESTful APIs and WebSocket support
 - **Model Fallback**: Automatic failover between AI models
 
-#### **AI Models (AWS Bedrock)**
+#### **AI Models (Amazon Bedrock)**
 - **Primary**: Claude Sonnet 3.7 (Inference Profile) - `us.anthropic.claude-3-7-sonnet-20250219-v1:0`
 - **Fallback**: Nova Premier (Inference Profile) - `us.amazon.nova-premier-v1:0`
 - **Safety Net**: Claude 3.5 Sonnet - `anthropic.claude-3-5-sonnet-20241022-v2:0`
@@ -246,7 +246,7 @@ The application automatically selects the best available model:
 
 | Variable | Description | Default | Max Recommended |
 |----------|-------------|---------|-----------------|
-| `AWS_READ_TIMEOUT` | AWS Bedrock read timeout (seconds) | `600` | `600` |
+| `AWS_READ_TIMEOUT` | Amazon Bedrock read timeout (seconds) | `600` | `600` |
 | `AWS_CONNECT_TIMEOUT` | AWS connection timeout (seconds) | `120` | `300` |
 | `AWS_MAX_RETRIES` | Maximum retry attempts | `5` | `10` |
 | `AGENTCORE_SESSION_TIMEOUT` | AgentCore session timeout (seconds) | `1800` | `1800` |

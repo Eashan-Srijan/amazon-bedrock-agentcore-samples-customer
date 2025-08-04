@@ -6,7 +6,7 @@ An interactive agent built with Strands that connects to a local MCP server to p
 
 ## Overview
 
-This project demonstrates how to use Strands Agents with an MCP (Model Context Protocol) server to create an interactive insurance assistant. The agent leverages Claude 3.7 Sonnet via AWS Bedrock and connects to local insurance API tools exposed through an MCP server.
+This project demonstrates how to use Strands Agents with an MCP (Model Context Protocol) server to create an interactive insurance assistant. The agent leverages Claude 3.7 Sonnet via Amazon Bedrock and connects to local insurance API tools exposed through an MCP server.
 
 ## Prerequisites
 
@@ -50,7 +50,7 @@ pip install -r requirements.txt
 
 ### 4. AWS Credentials Setup
 
-This agent uses AWS Bedrock to access Claude 3.7 Sonnet. Make sure your AWS credentials are properly configured:
+This agent uses Amazon Bedrock to access Claude 3.7 Sonnet. Make sure your AWS credentials are properly configured:
 
 1. Install the AWS CLI if you haven't already:
    ```bash
@@ -207,4 +207,4 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](../../
 - MCP Server: Based on the LocalMCP FastMCP server
 - Insurance API: Built with FastAPI
 - Agent Framework: Strands Agents by Anthropic
-- LLM: Claude 3.7 Sonnet via AWS Bedrock
+- LLM: Claude 3.7 Sonnet via Amazon Bedrock

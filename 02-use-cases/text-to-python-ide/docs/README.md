@@ -424,5 +424,5 @@ This project is licensed under the MIT License.
 
 For issues and questions:
 1. Check the troubleshooting section
-2. Review AWS Bedrock AgentCore documentation
+2. Review Amazon Bedrock AgentCore documentation
 3. Open an issue in the repository

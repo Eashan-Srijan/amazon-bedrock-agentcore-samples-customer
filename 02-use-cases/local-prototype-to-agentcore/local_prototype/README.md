@@ -56,7 +56,7 @@ An interactive agent built with Anthropic's Strands framework that connects to t
 **Key Features:**
 - Natural language interaction with insurance tools
 - Conversation history and context persistence
-- AWS Bedrock integration for Claude 3.7 Sonnet
+- Amazon Bedrock integration for Claude 3.7 Sonnet
 - Comprehensive error handling and response formatting
 
 ### 4. Streamlit Dashboard

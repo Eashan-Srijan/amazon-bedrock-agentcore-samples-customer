@@ -1,6 +1,6 @@
 # IAM Roles Setup for Bedrock AgentCore
 
-This directory contains scripts to set up the necessary IAM roles for AWS Bedrock AgentCore applications with the correct permissions.
+This directory contains scripts to set up the necessary IAM roles for Amazon Bedrock AgentCore applications with the correct permissions.
 
 ## Quick Setup
 

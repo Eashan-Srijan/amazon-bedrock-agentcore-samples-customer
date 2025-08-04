@@ -9,7 +9,7 @@
 | Example complexity  | Easy                                                                 |
 | SDK used            | Amazon BedrockAgentCore Python SDK                                           |
 
-This example demonstrates how to integrate a LlamaIndex agent with AWS Bedrock AgentCore, enabling you to deploy a financial assistant with tool-using capabilities as a managed service.
+This example demonstrates how to integrate a LlamaIndex agent with Amazon Bedrock AgentCore, enabling you to deploy a financial assistant with tool-using capabilities as a managed service.
 
 ## Prerequisites
 
@@ -39,7 +39,7 @@ uv pip install -r requirements.txt
 
 ### 3. Understanding the Agent Code
 
-The `llama_agent_hello_world.py` file contains a LlamaIndex agent with financial tools and basic math capabilities, integrated with Bedrock AgentCore:
+The `llama_agent_hello_world.py` file contains a LlamaIndex agent with financial tools and basic math capabilities, integrated with Amazon Bedrock AgentCore:
 
 ```python
 import asyncio
@@ -82,7 +82,7 @@ if __name__ == "__main__":
     app.run()
 ```
 
-### 4. Configure and Launch with Bedrock AgentCore Toolkit
+### 4. Configure and Launch with Amazon Bedrock AgentCore Toolkit
 
 ```bash
 # Configure your agent for deployment
@@ -129,7 +129,7 @@ This agent uses LlamaIndex's agent framework to create a financial assistant tha
 3. Perform basic mathematical operations when needed
 4. Provide comprehensive responses based on the data
 
-The agent is wrapped with the Bedrock AgentCore framework, which handles:
+The agent is wrapped with the Amazon Bedrock AgentCore framework, which handles:
 - Deployment to AWS
 - Scaling and management
 - Request/response handling
@@ -138,6 +138,6 @@ The agent is wrapped with the Bedrock AgentCore framework, which handles:
 ## Additional Resources
 
 - [LlamaIndex Documentation](https://docs.llamaindex.ai/en/stable/use_cases/agents/)
-- [Bedrock AgentCore Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-core.html)
+- [Amazon Bedrock AgentCore Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-core.html)
 - [OpenAI API Documentation](https://platform.openai.com/docs/api-reference)
 - [Yahoo Finance API Documentation](https://pypi.org/project/yfinance/)

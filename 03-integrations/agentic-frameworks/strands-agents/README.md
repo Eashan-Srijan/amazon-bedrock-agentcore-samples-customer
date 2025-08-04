@@ -1,4 +1,4 @@
-# Strands Agent with Bedrock AgentCore Integration
+# Strands Agent with Amazon Bedrock AgentCore Integration
 
 | Information         | Details                                                                      |
 |---------------------|------------------------------------------------------------------------------|
@@ -9,13 +9,13 @@
 | Example complexity  | Easy                                                                 |
 | SDK used            | Amazon BedrockAgentCore Python SDK                                           |
 
-These example demonstrate how to integrate a Strands agents with AWS Bedrock AgentCore, enabling you to deploy your agent as a managed service. You can use the `agentcore` CLI to configure and launch these agents. 
+These example demonstrate how to integrate a Strands agents with Amazon Bedrock AgentCore, enabling you to deploy your agent as a managed service. You can use the `agentcore` CLI to configure and launch these agents. 
 
 ## Prerequisites
 
 - Python 3.10+
 - [uv](https://github.com/astral-sh/uv) - Fast Python package installer and resolver
-- AWS account with Bedrock Agentcore access
+- AWS account with Amazon Bedrock Agentcore access
 
 ## Setup Instructions
 
@@ -58,7 +58,7 @@ print(api_key_provider)
 
 ### 4. Understanding the Agent Code
 
-The `strands_agent_file_system.py` file contains a simple Strands agent with file system capabilities, integrated with Bedrock AgentCore:
+The `strands_agent_file_system.py` file contains a simple Strands agent with file system capabilities, integrated with Amazon Bedrock AgentCore:
 
 ```python
 import os
@@ -70,7 +70,7 @@ from strands_tools import file_read, file_write, editor
 # Initialize Strands agent with file system tools
 agent = Agent(tools=[file_read, file_write, editor])
 
-# Integrate with Bedrock AgentCore
+# Integrate with Amazon Bedrock AgentCore
 from bedrock_agentcore.runtime import BedrockAgentCoreApp
 app = BedrockAgentCoreApp()
 
@@ -84,7 +84,7 @@ def agent_invocation(payload, context):
 app.run()
 ```
 
-### 5. Configure and Launch with Bedrock AgentCore Toolkit
+### 5. Configure and Launch with Amazon Bedrock AgentCore Toolkit
 
 ```bash
 # Configure your agent for deployment

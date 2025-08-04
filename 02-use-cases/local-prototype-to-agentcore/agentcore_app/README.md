@@ -1,19 +1,19 @@
-# From Prototype to Production: Agentic Applications with AWS Bedrock AgentCore
+# From Prototype to Production: Agentic Applications with Amazon Bedrock AgentCore
 
 <div align="center">
   <img src="https://img.shields.io/badge/Python-3.10+-blue.svg" alt="Python 3.10+"/>
-  <img src="https://img.shields.io/badge/AWS-Bedrock_AgentCore-orange.svg" alt="AWS Bedrock AgentCore"/>
+  <img src="https://img.shields.io/badge/AWS-Bedrock_AgentCore-orange.svg" alt="Amazon Bedrock AgentCore"/>
   <img src="https://img.shields.io/badge/Strands-Agents-green.svg" alt="Strands Agents"/>
   <img src="https://img.shields.io/badge/FastAPI-0.100.0+-purple.svg" alt="FastAPI"/>
 </div>
 
-This project demonstrates how to migrate a local agent-based MCP application with an API tool to AWS cloud for production benefits. The implementation leverages AWS Bedrock AgentCore, which helps productionalize agentic applications with features like authentication, observability, and managed runtime environments.
+This project demonstrates how to migrate a local agent-based MCP application with an API tool to AWS cloud for production benefits. The implementation leverages Amazon Bedrock AgentCore, which helps productionalize agentic applications with features like authentication, observability, and managed runtime environments.
 
 
 
 ## Overview
 
-The `production_using_agentcore` folder contains cloud-based implementations of the insurance application components found in the `local_prototype` folder, modified to leverage AWS Bedrock AgentCore services.
+The `production_using_agentcore` folder contains cloud-based implementations of the insurance application components found in the `local_prototype` folder, modified to leverage Amazon Bedrock AgentCore services.
 
 ## Architecture
 ![Bedrock AgentCore Insurance App Architecture](../agentcore-insurance-app-architecture.png)
@@ -22,7 +22,7 @@ The `production_using_agentcore` folder contains cloud-based implementations of 
 The solution consists of three main components:
 
 1. **Cloud Insurance API** (`cloud_insurance_api/`): A FastAPI application deployed as an AWS Lambda function with API Gateway integration
-2. **Cloud MCP Server** (`cloud_mcp_server/`): A gateway configuration that exposes the insurance API as an MCP tool through AWS Bedrock AgentCore Gateway
+2. **Cloud MCP Server** (`cloud_mcp_server/`): A gateway configuration that exposes the insurance API as an MCP tool through Amazon Bedrock AgentCore Gateway
 3. **Cloud Strands Insurance Agent** (`cloud_strands_insurance_agent/`): A Strands-based agent implementation that connects to the AgentCore Gateway to access the insurance API tools
 
 ## Prerequisites
@@ -52,7 +52,7 @@ This deploys the FastAPI application using AWS SAM and creates all necessary res
 
 ### 2. Setup the MCP Server with AgentCore Gateway
 
-Next, configure the AWS Bedrock AgentCore Gateway to expose the insurance API as an MCP tool:
+Next, configure the Amazon Bedrock AgentCore Gateway to expose the insurance API as an MCP tool:
 
 ```bash
 cd ../cloud_mcp_server
@@ -116,7 +116,7 @@ See the [Cloud Insurance API README](cloud_insurance_api/README.md) for detailed
 
 ### Cloud MCP Server
 
-Provides gateway configuration for AWS Bedrock AgentCore that:
+Provides gateway configuration for Amazon Bedrock AgentCore that:
 - Exposes the Insurance API endpoints as MCP tools
 - Configures authentication using Amazon Cognito
 - Sets up the execution environment for the tools

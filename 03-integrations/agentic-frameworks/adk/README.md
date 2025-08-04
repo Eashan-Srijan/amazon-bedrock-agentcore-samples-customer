@@ -1,4 +1,4 @@
-# ADK Agent with Bedrock AgentCore Integration
+# ADK Agent with Amazon Bedrock AgentCore Integration
 
 | Information         | Details                                                                      |
 |---------------------|------------------------------------------------------------------------------|
@@ -9,7 +9,7 @@
 | Example complexity  | Easy                                                                 |
 | SDK used            | Amazon BedrockAgentCore Python SDK                                           |
 
-This example demonstrates how to integrate a Google ADK agent with AWS Bedrock AgentCore, enabling you to deploy a search-capable agent as a managed service.
+This example demonstrates how to integrate a Google ADK agent with Amazon Bedrock AgentCore, enabling you to deploy a search-capable agent as a managed service.
 
 ## Prerequisites
 
@@ -39,7 +39,7 @@ uv pip install -r requirements.txt
 
 ### 3. Understanding the Agent Code
 
-The `adk_agent_google_search.py` file contains a Google ADK agent with Google Search capabilities, integrated with Bedrock AgentCore:
+The `adk_agent_google_search.py` file contains a Google ADK agent with Google Search capabilities, integrated with Amazon Bedrock AgentCore:
 
 
 ```python
@@ -80,14 +80,14 @@ async def call_agent_async(query, user_id, session_id):
     
     return final_response
 
-# Integrate with Bedrock AgentCore
+# Integrate with Amazon Bedrock AgentCore
 from bedrock_agentcore.runtime import BedrockAgentCoreApp
 app = BedrockAgentCoreApp()
 
 @app.entrypoint
 def agent_invocation(payload, context):
     return asyncio.run(call_agent_async(
-        payload.get("prompt", "what is Bedrock Agentcore Runtime?"), 
+        payload.get("prompt", "what is Amazon Bedrock Agentcore Runtime?"), 
         payload.get("user_id", "user1234"), 
         context.session_id
     ))
@@ -95,7 +95,7 @@ def agent_invocation(payload, context):
 app.run()
 ```
 
-### 4. Configure and Launch with Bedrock AgentCore Toolkit
+### 4. Configure and Launch with Amazon Bedrock AgentCore Toolkit
 
 ```bash
 # Configure your agent for deployment
@@ -134,7 +134,7 @@ This agent uses Google's ADK (Agent Development Kit) framework to create an assi
 3. Incorporate search results into coherent responses
 4. Maintain session state between interactions
 
-The agent is wrapped with the Bedrock AgentCore framework, which handles:
+The agent is wrapped with the Amazon Bedrock AgentCore framework, which handles:
 - Deployment to AWS
 - Scaling and management
 - Request/response handling
@@ -144,4 +144,4 @@ The agent is wrapped with the Bedrock AgentCore framework, which handles:
 
 - [Google ADK Documentation](https://github.com/google/adk)
 - [Gemini API Documentation](https://ai.google.dev/docs)
-- [Bedrock AgentCore Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-core.html)
+- [Amazon Bedrock AgentCore Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-core.html)

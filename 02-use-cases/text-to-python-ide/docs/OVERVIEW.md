@@ -2,7 +2,7 @@
 
 ## What is AgentCore Code Interpreter?
 
-The AgentCore Code Interpreter is an AI-powered development tool that bridges natural language and Python code execution. It combines the power of AWS Bedrock's advanced language models with secure code execution environments to create a seamless coding experience.
+The AgentCore Code Interpreter is an AI-powered development tool that bridges natural language and Python code execution. It combines the power of Amazon Bedrock's advanced language models with secure code execution environments to create a seamless coding experience.
 
 ## Core Capabilities
 
@@ -65,7 +65,7 @@ The AgentCore Code Interpreter is an AI-powered development tool that bridges na
 - Secure credential management
 
 ### **High Performance**
-- Leverages AWS Bedrock's optimized inference profiles
+- Leverages Amazon Bedrock's optimized inference profiles
 - Fast response times with intelligent caching
 - Connection pooling for efficient AWS service usage
 - React component optimization with memoization
@@ -92,7 +92,7 @@ The AgentCore Code Interpreter is an AI-powered development tool that bridges na
 - **Inference Profiles**: Optimized model deployment for better performance
 
 ### **Execution Environment**
-- **AgentCore**: AWS Bedrock's code interpreter service
+- **AgentCore**: Amazon Bedrock's code interpreter service
 - **Sandboxed Execution**: Isolated Python environments
 - **Real-time Streaming**: Live output and error reporting
 
